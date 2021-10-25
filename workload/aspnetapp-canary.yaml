@@ -32,7 +32,7 @@ spec:
               - key: app.kubernetes.io/name
                 operator: In
                 values:
-                - aspnetapp
+                - aspnetapp-canary
             topologyKey: "kubernetes.io/hostname"
         podAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
