@@ -827,7 +827,15 @@
                         "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', variables('hubLaName'))]",
                         "logs": [
                             {
-                                "category": "AllLogs",
+                                "category": "AzureFirewallApplicationRule",
+                                "enabled": true
+                            },
+                            {
+                                "category": "AzureFirewallNetworkRule",
+                                "enabled": true
+                            },
+                            {
+                                "category": "AzureFirewallDnsProxy",
                                 "enabled": true
                             }
                         ],
