@@ -323,7 +323,7 @@
             "name": "PodFailedScheduledQuery",
             "type": "microsoft.insights/scheduledqueryrules",
             "location": "[parameters('location')]",
-            "apiVersion": "2021-02-01-preview",
+            "apiVersion": "2021-08-01",
             "tags": {},
             "properties": {
                 "description": "Example from: https://docs.microsoft.com/azure/azure-monitor/insights/container-insights-alerts",
