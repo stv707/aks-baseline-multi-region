@@ -14,12 +14,6 @@
                 "description": "The shared Azure Container Registry Id"
             }
         },
-        "acrPrivateDnsZonesId": {
-            "type": "string",
-            "metadata": {
-                "description": "The shared Azure Container Registry Private Endopoint Id"
-            }
-        },
         "appInstanceId": {
             "type": "string",
             "allowedValues": [
@@ -132,6 +126,7 @@
         "apwResourceId": "[resourceId('Microsoft.Network/applicationGateways', variables('agwName'))]",
 
         "akvPrivateDnsZonesName": "privatelink.vaultcore.azure.net",
+        "acrPrivateDnsZonesName": "privatelink.azurecr.io",
 
         "clusterControlPlaneIdentityName": "[concat('mi-', variables('clusterName'), '-controlplane')]",
 
@@ -290,6 +285,14 @@
                     }
                 }
             ]
+        },
+        {
+            "type": "Microsoft.Network/privateDnsZones",
+            "apiVersion": "2020-06-01",
+            "name": "[variables('acrPrivateDnsZonesName')]",
+            "location": "global",
+            "comments": "Enabling Azure Container Registry Private Link on vnet.",
+            "properties": {}
         },
         {
             "type": "Microsoft.Network/privateEndpoints",
@@ -765,14 +768,15 @@
                     "name": "default",
                     "location": "[parameters('location')]",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Network/privateEndpoints', concat('acr-to-', variables('vnetName')))]"
+                        "[resourceId('Microsoft.Network/privateEndpoints', concat('acr-to-', variables('vnetName')))]",
+                        "[resourceId('Microsoft.Network/privateDnsZones', variables('acrPrivateDnsZonesName'))]"
                     ],
                     "properties": {
                         "privateDnsZoneConfigs": [
                             {
                                 "name": "privatelink-azurecr-io",
                                 "properties": {
-                                    "privateDnsZoneId": "[parameters('acrPrivateDnsZonesId')]"
+                                    "privateDnsZoneId": "[resourceId('Microsoft.Network/privateDnsZones', variables('acrPrivateDnsZonesName'))]"
                                 }
                             }
                         ]

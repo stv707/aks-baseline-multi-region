@@ -67,7 +67,6 @@
         "logAnalyticsWorkspaceName": "[concat('la-', variables('subRgUniqueString'))]",
         "defaultAcrName": "[concat('acraks', variables('subRgUniqueString'))]",
 
-        "acrPrivateDnsZonesName": "privatelink.azurecr.io",
 
         "frontDoorName": "[concat('bicycle', variables('subRgUniqueString'))]",
         "frontDoorPolicyName": "[concat('policyfd', variables('subRgUniqueString'))]",
@@ -137,14 +136,6 @@
                     }
                 }
           ]
-        },
-        {
-            "type": "Microsoft.Network/privateDnsZones",
-            "apiVersion": "2020-06-01",
-            "name": "[variables('acrPrivateDnsZonesName')]",
-            "location": "global",
-            "comments": "Enabling Azure Container Registry Private Link on vnet.",
-            "properties": {}
         },
         {
             "type": "Microsoft.OperationalInsights/workspaces",
@@ -538,10 +529,6 @@
         "containerRegistryName": {
             "type": "string",
             "value": "[variables('defaultAcrName')]"
-        },
-        "acrPrivateDnsZonesId": {
-            "type": "string",
-            "value": "[resourceId('Microsoft.Network/privateDnsZones', variables('acrPrivateDnsZonesName'))]"
         },
         "fqdn": {
             "type": "string",
