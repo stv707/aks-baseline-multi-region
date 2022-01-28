@@ -1,4 +1,4 @@
-# This workflow will deploy two clusters, one in each region, without the workload.
+# This workflow will deploy two clusters, one in each region, without the workload. 
 #
 # Follow the next steps to use this workflow:
 #
@@ -50,7 +50,7 @@ jobs:
           az acr import --source docker.io/weaveworks/kured:1.6.1 -n $ACR_NAME_BU0001A0042 --force
           az acr import --source docker.io/library/traefik:v2.5.3 -n $ACR_NAME_BU0001A0042 --force
 
-        azcliversion: 2.17.1
+        azcliversion: 2.30.0
 
     # -----------------------REGION1------------------------------------------------
     # Deploy the cluster into your environment, assuming all prerequisites are up and running.
@@ -68,7 +68,7 @@ jobs:
               aksIngressControllerCertificate=${{ secrets.AKS_INGRESS_CONTROLLER_CERTIFICATE_BASE64 }}
 
           echo "::set-output name=name::$(az deployment group show --resource-group rg-bu0001a0042-03 -n cluster-stamp --query properties.outputs.aksClusterName.value -o tsv)"
-        azcliversion: 2.17.1
+        azcliversion: 2.30.0
 
     # Set the AKS cluster context - Region 1
     - name: Set the AKS cluster context - Region 1
@@ -129,7 +129,7 @@ jobs:
               aksIngressControllerCertificate=${{ secrets.AKS_INGRESS_CONTROLLER_CERTIFICATE_BASE64 }}
 
           echo "::set-output name=name::$(az deployment group show --resource-group rg-bu0001a0042-04 -n cluster-stamp --query properties.outputs.aksClusterName.value -o tsv)"
-        azcliversion: 2.17.1
+        azcliversion: 2.30.0
 
     # Set the AKS cluster context - Region 2
     - name: Set the AKS cluster context - Region 2
@@ -174,4 +174,4 @@ jobs:
           FRONT_DOOR_BACKENDPOOL_NAME=$(az deployment group show -g rg-bu0001a0042-shared -n shared-svcs-stamp --query properties.outputs.frontDoorBackendPoolName.value -o tsv)
           az network front-door backend-pool backend add --address $APPGW_FQDN_BU0001A0042_04 --front-door-name $FRONT_DOOR_NAME --pool-name $FRONT_DOOR_BACKENDPOOL_NAME -g rg-bu0001a0042-shared --backend-host-header $APPGW_FQDN_BU0001A0042_04 --disabled false --http-port 80 --https-port 443  --priority 1 --weight 50
          
-        azcliversion: 2.17.1
+        azcliversion: 2.30.0

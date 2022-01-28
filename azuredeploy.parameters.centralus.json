@@ -25,9 +25,6 @@
       },
       "containerRegistryId": {
         "value": "<container-registry-id>"
-      },
-      "acrPrivateDnsZonesId": {
-        "value": "<acrPrivateDns-zones-id>"
       }
     }
   }
