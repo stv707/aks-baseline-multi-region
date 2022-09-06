@@ -41,7 +41,7 @@ Finally, this implementation uses the [ASP.NET Docker samples](https://github.co
 
 - [Flux GitOps Operator](https://fluxcd.io)
 - [Traefik Ingress Controller](https://doc.traefik.io/traefik/v2.5/routing/providers/kubernetes-ingress/)
-- [Azure AD Pod Identity](https://github.com/Azure/aad-pod-identity)
+- [Azure Workload Identity](https://github.com/Azure/azure-workload-identity) _[AKS-managed add-on]_
 - [Azure KeyVault Secret Store CSI Provider](https://github.com/Azure/secrets-store-csi-driver-provider-azure)
 - [Kured](https://docs.microsoft.com/azure/aks/node-updates-kured)
 
@@ -82,12 +82,11 @@ There is WAF protection enabled on Application Gateway and Azure Front Door. The
 
 While this reference implementation tends to avoid _preview_ features of AKS to ensure you have the best customer support experience; there are some features you may wish to evaluate in pre-production clusters that augment your posture around security, manageability, etc. Consider trying out and providing feedback on the following. As these features come out of preview, this reference implementation may be updated to incorporate them.
 
-- [Preview features coming from the AKS Secure Baseline](https://github.com/mspnp/aks-secure-baseline#preview-features)
-- _Currently the Azure Kubernetes Service (AKS) for Multi-Region Deployment does not implement any Preview feature directly_
+- [Preview features coming from the AKS baseline](https://github.com/mspnp/aks-baseline#preview-features)
 
 ## Next Steps
 
-This reference implementation intentionally does not cover all scenarios. If you are looking for other topics that are not addressed here, please visit [AKS Secure Baseline for the complete list of covered scenarios around AKS](https://github.com/mspnp/aks-secure-baseline#advanced-topics).
+This reference implementation intentionally does not cover all scenarios. If you are looking for other topics that are not addressed here, please visit [AKS baseline for the complete list of covered scenarios around AKS](https://github.com/mspnp/aks-baseline#advanced-topics).
 
 ## Related documentation
 
