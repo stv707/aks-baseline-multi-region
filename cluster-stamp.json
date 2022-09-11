@@ -1,4 +1,4 @@
-{contoso
+{
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "0.0.0.5",
     "parameters": {
@@ -236,7 +236,7 @@
                 {
                     "type": "secrets",
                     "apiVersion": "2019-09-01",
-                    "name": "appgw-ingress-internal-aks-ingress-contoso-com-tls",
+                    "name": "appgw-ingress-internal-aks-ingress-vanessa-com-tls",
                     "dependsOn": [
                         "[resourceId('Microsoft.KeyVault/vaults', variables('keyVaultName'))]"
                     ],
@@ -387,7 +387,7 @@
         {
             "type": "Microsoft.Network/privateDnsZones",
             "apiVersion": "2018-09-01",
-            "name": "aks-ingress.contoso.com",
+            "name": "aks-ingress.vanessa.com.my",
             "location": "global",
             "properties": {},
             "resources": [
@@ -396,7 +396,7 @@
                     "apiVersion": "2018-09-01",
                     "name": "[toLower(variables('orgAppId'))]",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Network/privateDnsZones', 'aks-ingress.contoso.com')]"
+                        "[resourceId('Microsoft.Network/privateDnsZones', 'aks-ingress.vanessa.com.my')]"
                     ],
                     "properties": {
                         "ttl": 3600,
@@ -413,7 +413,7 @@
                     "name": "[concat('to_', variables('vnetName'))]",
                     "location": "global",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Network/privateDnsZones', 'aks-ingress.contoso.com')]"
+                        "[resourceId('Microsoft.Network/privateDnsZones', 'aks-ingress.vanessa.com.my')]"
                     ],
                     "properties": {
                         "virtualNetwork": {
@@ -458,9 +458,9 @@
                 },
                 "trustedRootCertificates": [
                     {
-                        "name": "root-cert-wildcard-aks-ingress-contoso",
+                        "name": "root-cert-wildcard-aks-ingress-vanessa",
                         "properties": {
-                            "keyVaultSecretId": "[concat(reference(variables('keyVaultName')).vaultUri,'secrets/appgw-ingress-internal-aks-ingress-contoso-com-tls')]"
+                            "keyVaultSecretId": "[concat(reference(variables('keyVaultName')).vaultUri,'secrets/appgw-ingress-internal-aks-ingress-vanessa-com-tls')]"
                         }
                     }
                 ],
@@ -513,7 +513,7 @@
                 ],
                 "probes": [
                     {
-                        "name": "[concat('probe-',toLower(variables('appId')),'.aks-ingress.contoso.com')]",
+                        "name": "[concat('probe-',toLower(variables('appId')),'.aks-ingress.vanessa.com.my')]",
                         "properties": {
                             "protocol": "Https",
                             "path": "/favicon.ico",
@@ -529,11 +529,11 @@
                 ],
                 "backendAddressPools": [
                     {
-                        "name": "[concat(toLower(variables('appId')),'.aks-ingress.contoso.com')]",
+                        "name": "[concat(toLower(variables('appId')),'.aks-ingress.vanessa.com.my')]",
                         "properties": {
                             "backendAddresses": [
                                 {
-                                    "fqdn": "[concat(toLower(variables('orgAppId')),'.aks-ingress.contoso.com')]"
+                                    "fqdn": "[concat(toLower(variables('orgAppId')),'.aks-ingress.vanessa.com.my')]"
                                 }
                             ]
                         }
@@ -541,7 +541,7 @@
                 ],
                 "backendHttpSettingsCollection": [
                     {
-                        "name": "aks-ingress-contoso-backendpool-httpsettings",
+                        "name": "aks-ingress-vanessa-backendpool-httpsettings",
                         "properties": {
                             "port": 443,
                             "protocol": "Https",
@@ -549,11 +549,11 @@
                             "pickHostNameFromBackendAddress": true,
                             "requestTimeout": 20,
                             "probe": {
-                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('agwName')),'/probes/probe-',toLower(variables('appId')),'.aks-ingress.contoso.com')]"
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('agwName')),'/probes/probe-',toLower(variables('appId')),'.aks-ingress.vanessa.com.my')]"
                             },
                             "trustedRootCertificates": [
                                 {
-                                    "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('agwName')), '/trustedRootCertificates/root-cert-wildcard-aks-ingress-contoso')]"
+                                    "id": "[concat(resourceId('Microsoft.Network/applicationGateways', variables('agwName')), '/trustedRootCertificates/root-cert-wildcard-aks-ingress-vanessa')]"
                                 }
                             ]
                         }
@@ -589,10 +589,10 @@
                                 "id": "[concat(variables('apwResourceId'), '/httpListeners/listener-https')]"
                             },
                             "backendAddressPool": {
-                                "id": "[concat(variables('apwResourceId'), '/backendAddressPools/',toLower(variables('appId')),'.aks-ingress.contoso.com')]"
+                                "id": "[concat(variables('apwResourceId'), '/backendAddressPools/',toLower(variables('appId')),'.aks-ingress.vanessa.com.my')]"
                             },
                             "backendHttpSettings": {
-                                "id": "[concat(variables('apwResourceId'), '/backendHttpSettingsCollection/aks-ingress-contoso-backendpool-httpsettings')]"
+                                "id": "[concat(variables('apwResourceId'), '/backendHttpSettingsCollection/aks-ingress-vanessa-backendpool-httpsettings')]"
                             }
                         }
                     }
