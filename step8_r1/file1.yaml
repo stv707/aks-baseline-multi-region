@@ -1,0 +1,18 @@
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: podmi-ingress-controller-identity
+  namespace: a0042
+spec:
+  type: 0
+  resourceID: /subscriptions/e09280a5-2e1f-4afb-a98f-25a931e8cf3d/resourceGroups/rg-bu0001a0042-03/providers/Microsoft.ManagedIdentity/userAssignedIdentities/podmi-ingress-controller
+  clientID: 0a107710-a60d-4525-a287-e5ebc6a4f901
+---
+apiVersion: aadpodidentity.k8s.io/v1
+kind: AzureIdentityBinding
+metadata:
+  name: podmi-ingress-controller-binding
+  namespace: a0042
+spec:
+  azureIdentity: podmi-ingress-controller-identity
+  selector: podmi-ingress-controller
