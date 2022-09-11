@@ -76,7 +76,7 @@
             }
         },
         "deployFlowLogResources": {
-            "defaultValue": true,
+            "defaultValue": false,
             "type": "bool",
             "metadata": {
                 "description": "Flow Logs are enabled by default, if for some reason they cause conflicts with flow log policies already in place in your subscription, you can disable them by passing 'false' to this parameter."
